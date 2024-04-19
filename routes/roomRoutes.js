@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const roomController = require('../controllers/roomController');
+const Room = require('../models/room');
 
-// Route pour afficher toutes les salles disponibles
-router.get('/rooms', roomController.getAllRooms);
+router.get('/rooms', async (req, res) => {
+  try {
+    const rooms = await Room.find();
+    res.json({ status: 'success', data: rooms });
+  } catch (error) {
+    res.status(500).json({ status: 'error', message: error.message });
+  }
+});
 
-// Route pour réserver une salle
-router.post('/rooms/:roomId/book', roomController.bookRoom);
+router.put('/rooms/:id', roomController.updateRoom);
 
-// Autres routes de gestion des salles
 
 module.exports = router;
