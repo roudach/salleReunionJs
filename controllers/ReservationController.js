@@ -1,5 +1,5 @@
-const Reservation = require('../models/Reservation');
-const Room = require('../models/Room');
+const Reservation = require('../models/ReservationSchema');
+const Room = require('../models/RoomSchema');
 const nodemailer = require('nodemailer');
 
 const createReservation = async (req, res) => {

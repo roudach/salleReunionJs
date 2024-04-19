@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('./controllers/UserController');
-const roomController = require('./controllers/RoomController');
-const reservationController = require('./controllers/ReservationController');
-const authenticate = require('./middleware/AuthentificationMiddleware');
-const authorizeAdmin = require('./middleware/AuthorizedMiddleware');
+const userController = require('../controllers/UserController');
+const roomController = require('../controllers/roomController');
+const reservationController = require('../controllers/ReservationController');
+const authenticate = require('../middleware/AuthentificationMiddleware');
+const authorizeAdmin = require('../middleware/AuthorizedMiddleware');
 
 // User routes
 router.post('/register', userController.registerUser);
