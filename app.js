@@ -1,18 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const routes = require('./routes/Routes');
+require('dotenv').config();
 
 const app = express();
 
-// Configuration de la base de données MongoDB
-const mongoURI = 'mongodb+srv://roudaynacherif9:roudayna.cherif@cluster0.gsxojr4.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connecté à MongoDB'))
-  .catch(err => console.error('Erreur de connexion à MongoDB:', err));
+// Middlewares
+app.use(express.json());
+app.use('/api', routes);
 
-// Autres configurations et middleware
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://roudaynacherif9:roudayna.cherif@cluster0.gsxojr4.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('Failed to connect to MongoDB', err));
 
-// Démarrez le serveur
+// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

@@ -1,28 +1,26 @@
-const Room = require('../models/room');
+const Room = require('../models/Room');
 
-exports.createRoom = async (req, res) => {
-  try {
-    const { name, capacity, amenities } = req.body;
-    const newRoom = await Room.create({ name, capacity, amenities });
-    res.status(201).json({ status: 'success', data: newRoom });
-  } catch (error) {
-    res.status(400).json({ status: 'error', message: error.message });
-  }
+const createRoom = async (req, res) => {
+    try {
+        const { name, capacity } = req.body;
+        const room = new Room({ name, capacity });
+        await room.save();
+        res.status(201).json(room);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
-
-
-
-exports.updateRoom = async (req, res) => {
-  try {
-    const roomId = req.params.id; 
-    const { name, capacity, amenities } = req.body; 
-    const updatedRoom = await Room.findOneAndUpdate({ _id: roomId }, { name, capacity, amenities }, { new: true });
-    if (!updatedRoom) {
-      return res.status(404).json({ status: 'error', message: 'Salle de réunion non trouvée' });
+const listRooms = async (req, res) => {
+    try {
+        const rooms = await Room.find();
+        res.json(rooms);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-    res.json({ status: 'success', data: updatedRoom });
-  } catch (error) {
-    res.status(400).json({ status: 'error', message: error.message });
-  }
+};
+
+module.exports = {
+    createRoom,
+    listRooms,
 };
