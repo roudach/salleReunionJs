@@ -1,41 +1,39 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const ejsLayouts = require('express-ejs-layouts');
-
+const path = require('path');
 const roomRoutes = require('./routes/roomRoutes');
+const reservationRoutes = require('./routes/reservationRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 
-// Middlewares
-app.use(express.json());
-app.use(express.static('public'));
-app.use(ejsLayouts);
-app.set('view engine', 'ejs');
-app.set('views', './views');
-app.set('layout', './views/layouts/layout');
-
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'your-mongo-uri')
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Failed to connect to MongoDB', err));
 
-// Use room routes
-app.use('/api/rooms', roomRoutes);
+    // Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-// Use user routes
-app.use('/api/users', userRoutes);
+// Routes
+app.use('/', userRoutes);
+app.use('/', roomRoutes);
+app.use('/', reservationRoutes);
 
-// Define a route to display rooms
-app.get('/rooms', (req, res) => {
-    res.render('rooms');
+// Homepage route
+app.get('/', (req, res) => {
+  res.render('index');
 });
 
-// Start the server
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

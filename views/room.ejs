@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Rooms</title>
+</head>
+<body>
+    <h1>Available Rooms</h1>
+    <ul>
+        <% rooms.forEach(room => { %>
+            <li>
+                <h2><%= room.name %></h2>
+                <p>Capacity: <%= room.capacity %></p>
+                <p>Description: <%= room.description %></p>
+                <a href="/reservation?roomId=<%= room._id %>">Reserve</a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

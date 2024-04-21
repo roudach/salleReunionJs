@@ -1,28 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController');
 
-const userController = require('../controllers/UserController');
-const authenticate = require('../middleware/AuthentificationMiddleware'); // Correcting potential typo
+router.post('/register', userController.register);
+router.post('/login', userController.login);
 
-// Route to get user details by ID (requires authentication)
-router.get('/:id', authenticate, (req, res) => {
-    // Call the getUserById function from the userController
-    // Make sure userController.getUserById exists
-    userController.getUserById(req, res);
+
+// Define routes for handling GET requests (serving login and register pages)
+router.get('/login', (req, res) => {
+    res.render('login'); // Serve the login.ejs template
 });
 
-// Route to update user details (requires authentication)
-router.put('/:id', authenticate, (req, res) => {
-    // Call the updateUser function from the userController
-    // Make sure userController.updateUser exists
-    userController.updateUser(req, res);
+router.get('/register', (req, res) => {
+    res.render('register'); // Serve the register.ejs template
 });
 
-// Route to delete a user account (requires authentication)
-router.delete('/:id', authenticate, (req, res) => {
-    // Call the deleteUser function from the userController
-    // Make sure userController.deleteUser exists
-    userController.deleteUser(req, res);
-});
 
 module.exports = router;
