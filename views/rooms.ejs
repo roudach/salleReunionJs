@@ -1,0 +1,12 @@
+<% layout('layout') %>
+
+<h2>List of Rooms</h2>
+
+<ul>
+    <% rooms.forEach(room => { %>
+        <li>
+            <strong><%= room.name %></strong> (Capacity: <%= room.capacity %>)
+            <a href="/api/rooms/<%= room._id %>">View</a>
+        </li>
+    <% }) %>
+</ul>
