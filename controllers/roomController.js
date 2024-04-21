@@ -13,10 +13,11 @@ const createRoom = async (req, res) => {
 
 const getAllRooms = async (req, res) => {
   try {
-    const rooms = await Room.find();
-    res.render('rooms', { rooms });
+      const rooms = await Room.find(); // Fetch all rooms from the database
+      res.render('rooms', { rooms }); // Render the rooms view and pass the rooms data
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      console.error('Error fetching rooms:', error);
+      res.status(500).json({ error: 'Internal server error' });
   }
 };
 

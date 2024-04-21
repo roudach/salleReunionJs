@@ -1,0 +1,34 @@
+<!-- dashboard.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Add your stylesheet here -->
+</head>
+<body>
+    <header>
+        <h1>Welcome, <%= user.name %>!</h1>
+    </header>
+
+    <main>
+        <nav>
+            <ul>
+                <li><a href="/rooms">View List of Rooms</a></li>
+                <li><a href="/reserve-room">Reserve a Room</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Display additional options or information as needed -->
+    </main>
+
+    <footer>
+        <!-- Add any footer content here -->
+    </footer>
+
+    <script>
+        // Store the JWT token in local storage for subsequent requests
+        localStorage.setItem('jwt', '<%= token %>');
+    </script>
+</body>
+</html>
