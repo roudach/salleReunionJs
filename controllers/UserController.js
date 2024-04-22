@@ -22,30 +22,31 @@ const generateJwtToken = (user) => {
 // Function to register a new user
 const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { username, email, password } = req.body;
 
-        // Check if the user already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Email already in use' });
+        // Validate input
+        if (!username || !email || !password) {
+            return res.status(400).json({ error: 'Username, email, and password are required.' });
         }
 
-        // Hash the password before saving it to the database
-        const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT_ROUNDS) || 10);
+        // Check if a user with the same email already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email is already in use.' });
+        }
 
         // Create a new user
-        const newUser = new User({
-            name,
+        const user = new User({
+            username,
             email,
-            password: hashedPassword,
+            password
         });
 
         // Save the user to the database
-        await newUser.save();
+        await user.save();
 
-        // Send a success response
-        res.status(201).json({ message: 'User registered successfully', user: newUser });
-
+        // Return a success response
+        res.status(201).json({ message: 'User registered successfully.' });
     } catch (error) {
         console.error('Error during registration:', error);
         res.status(500).json({ error: 'Internal server error' });
