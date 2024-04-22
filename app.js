@@ -27,18 +27,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Configure express-session
+
 app.use(session({
     secret: process.env.SESSION_SECRET || 'default_secret', // Use a secure secret for production
     resave: false,
     saveUninitialized: false,
 }));
 
-// Configure Passport.js
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Define the local strategy
+
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -78,7 +78,7 @@ app.use('/', reservationRoutes);
 
 // Homepage route
 app.get('/', (req, res) => {
-    res.render('index'); // Serve the index.ejs template
+    res.render('index');
 });
 
 // Start server

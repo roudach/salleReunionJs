@@ -15,7 +15,7 @@ router.get('/create-room', authenticate, (req, res) => {
 router.post('/create-room', authenticate, roomController.createRoom);
 
 
-// Ensure you have a route to handle the POST request for creating a reservation
+
 router.post('/reservation', reservationController.createReservation);
 
 module.exports = router;

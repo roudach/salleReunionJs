@@ -4,14 +4,14 @@ const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config(); 
 
-// Function to create a reservation
+
 const createReservation = async (req, res) => {
     try {
-        // Extract roomId, startTime, and endTime from the request body
+        
         const { roomId, startTime, endTime } = req.body;
-        const userId = req.user.id; // Assuming req.user contains the logged-in user ID
+        const userId = req.user.id; 
 
         console.log('Room ID:', roomId);
         console.log('Request Body:', req.body);
@@ -19,7 +19,6 @@ const createReservation = async (req, res) => {
 
         
 
-        // Validate room and user existence
         const room = await Room.findById(roomId);
         if (!room) {
             return res.status(404).json({ error: 'Room not found' });
@@ -30,7 +29,6 @@ const createReservation = async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Check for overlapping reservations
         const overlappingReservation = await Reservation.findOne({
             room: roomId,
             $or: [
@@ -39,12 +37,10 @@ const createReservation = async (req, res) => {
             ]
         });
 
-        // If an overlapping reservation is found, return an error response
         if (overlappingReservation) {
             return res.status(400).json({ error: 'Room is already reserved for the specified time period' });
         }
 
-        // Create a new reservation
         const reservation = new Reservation({
             user: userId,
             room: roomId,
@@ -52,10 +48,8 @@ const createReservation = async (req, res) => {
             endTime,
         });
 
-        // Save the reservation to the database
         await reservation.save();
 
-        // Configure nodemailer transport for sending emails
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
@@ -64,7 +58,6 @@ const createReservation = async (req, res) => {
             },
         });
 
-        // Define the email options
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: user.email,
@@ -72,17 +65,18 @@ const createReservation = async (req, res) => {
             text: `You have reserved the room: ${room.name} from ${startTime} to ${endTime}.`,
         };
 
-        // Send the reservation confirmation email
         await transporter.sendMail(mailOptions);
 
-        // Send a success response with the reservation details
-        res.status(201).json({ message: 'Reservation created successfully', reservation });
+        res.render('reservationSuccess', {
+            user,
+            reservation,
+            room,
+            message: 'Reservation created successfully'
+        });
 
     } catch (error) {
-        // Log the error for debugging
         console.error('Error creating reservation:', error);
         
-        // Send an error response
         res.status(500).json({ error: 'Internal server error' });
     }
 };

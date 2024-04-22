@@ -22,11 +22,11 @@ const reservationSchema = new mongoose.Schema({
 });
 
 reservationSchema.pre('save', async function (next) {
-  // Log the reservation being attempted to save
+
   console.log('Attempting to save reservation:', this);
 
   try {
-    // Check for overlapping reservations
+
     const overlappingReservations = await Reservation.find({
       room: this.room,
       $or: [
@@ -35,19 +35,19 @@ reservationSchema.pre('save', async function (next) {
       ],
     });
 
-    // Log the result of overlapping reservations check
+
     console.log('Overlapping reservations found:', overlappingReservations);
 
     if (overlappingReservations.length > 0) {
       const error = new Error('The room is already reserved during the selected time period.');
-      // Log the error message
+
       console.log('Error:', error.message);
       next(error);
     } else {
       next();
     }
   } catch (error) {
-    // Log the error if any exception occurs
+
     console.error('Error in pre-save middleware:', error);
     next(error);
   }
