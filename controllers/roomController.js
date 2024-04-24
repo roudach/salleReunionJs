@@ -34,6 +34,24 @@ const createRoom = async (req, res) => {
     }
 };
 
+const deleteRoom = async (req, res) => {
+    try {
+        const roomId = req.params.roomId;
+
+        const room = await Room.findByIdAndDelete(roomId);
+
+        if (!room) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+
+        res.status(200).json({ message: 'Room deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting room:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
 const getAllRooms = async (req, res) => {
     try {
         const rooms = await Room.find();
@@ -48,4 +66,5 @@ module.exports = {
     createRoom,
     getAllRooms,
     reserveRoom,
+    deleteRoom,
 };

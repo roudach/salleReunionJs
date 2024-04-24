@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI)
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -75,6 +75,7 @@ passport.deserializeUser(async (id, done) => {
 app.use('/', userRoutes);
 app.use('/', roomRoutes);
 app.use('/', reservationRoutes);
+app.use('/rooms', roomRoutes);
 
 // Homepage route
 app.get('/', (req, res) => {

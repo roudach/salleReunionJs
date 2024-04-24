@@ -6,9 +6,22 @@ const dotenv = require('dotenv');
 
 dotenv.config(); 
 
+const getAllReservations = async (req, res) => {
+    try {
+        
+        const reservations = await Reservation.find();
+
+        res.render('reservations', { reservations });
+    } catch (error) {
+        console.error('Error fetching reservations:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 
 const createReservation = async (req, res) => {
     try {
+        
         
         const { roomId, startTime, endTime } = req.body;
         const userId = req.user.id; 
@@ -73,6 +86,7 @@ const createReservation = async (req, res) => {
             room,
             message: 'Reservation created successfully'
         });
+        
 
     } catch (error) {
         console.error('Error creating reservation:', error);
@@ -83,4 +97,5 @@ const createReservation = async (req, res) => {
 
 module.exports = {
     createReservation,
+    getAllReservations,
 };
