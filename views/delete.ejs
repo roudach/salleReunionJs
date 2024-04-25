@@ -1,0 +1,20 @@
+<!-- deleteRoom.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Room</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Optional: Link to your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Room</h1>
+        <form method="POST" action="/delete">
+            <div class="form-group">
+                <label for="roomId">Room ID:</label>
+                <input type="text" id="roomId" name="roomId" required>
+            </div>
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+</body>
+</html>
