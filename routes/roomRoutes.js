@@ -9,7 +9,9 @@ const authenticate = require('../middleware/authenticate');
 router.post('/room', roomController.createRoom);
 router.get('/rooms', roomController.getAllRooms);
 router.get('/reserve-room', roomController.reserveRoom);
-router.get('/reservations',  reservationController.getAllReservations);
+router.post('/reservations',  roomController.reserveRoom);
+router.get('/reservations', reservationController.getAllReservations);
+router.get('/rooms/:roomId', roomController.getRoomById);
 router.get('/create-room', (req, res) => {
     res.render('create_room');
 });

@@ -1,18 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Reserve Room</title>
+    <meta charset="UTF-8">
+    <meta name="viwport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve a Room</title>
+
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body{
+            background-image: url("img.webp");
+        }
+    </style>
 </head>
 <body>
-    <h1>Reserve a Room</h1>
-    <form action="/reservations" method="POST">
+    <section>
+        <div>
+            <h1>Reserve a Room</h1>
+            <form action="/reservations" method="POST">
+                
+            <div class="inputbox">
+                <label for="startTime"> </label>
+                <input type="datetime-local" id="startTime" name="startTime" required>
+            </div>
+            <div class="inputbox">
+                <label for="endTime"></label>
+                <input type="datetime-local" id="endTime" name="endTime" required>
+            </div>
+                
+                
+                
         
-        <label for="startTime">Start Time:</label>
-        <input type="datetime-local" id="startTime" name="startTime" required>
-        <label for="endTime">End Time:</label>
-        <input type="datetime-local" id="endTime" name="endTime" required>
-        <button type="submit">Reserve</button>
-    </form>
+                
+            
+            <div class="inputbox">
+                <input type="text" name="roomId" id="roomId" required>
+                <label for="roomId">Room ID:</label>
+                
+            </div>
+            
+            <button type="submit" ><a href="/reservations"></a><span></span>Reserve</button>
+            </form>
+        </div>
+        
+    </section>
+    
     
 </body>
 </html>

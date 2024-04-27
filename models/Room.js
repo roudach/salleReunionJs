@@ -28,6 +28,10 @@ const roomSchema = new mongoose.Schema({
 
 roomSchema.index({ name: 1 });
 
+roomSchema.virtual('roomId').get(function () {
+  return this._id.toString();
+});
+
 roomSchema.virtual('isReserved').get(function () {
   return this.status === 'reserved';
 });

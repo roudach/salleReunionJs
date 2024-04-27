@@ -12,27 +12,36 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome !</h1>
-    </header>
-
-    <main>
-        <nav>
-            <ul>
-                <li><a href="/rooms">List of Rooms</a></li>
-                <li><a href="/create-room">Create Room</a></li>
-                <li><a id="a" href="/reservations">Reserve a Room</a></li>
-                <li><a href="/delete">Delete a Room</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-
-        <!-- Display additional options or information as needed -->
-    </main>
-
-    <footer>
-        <!-- Add any footer content here -->
-    </footer>
+   
+        
+    
+    <div class="content">
+        <h1>Welcome <%=user.username%> !</h1>
+        <p>            <br>          </p>
+        
+            
+                
+                    <ul><button><a href="/rooms">List of Rooms</a><span></span></button></ul>
+                
+                
+                    <ul><button><a href="/create-room">Create Room</a><span></span></button></ul>
+                
+                    <ul><button><a id="a" href="/reservations">Reserve a Room</a><span></span></button></ul>
+                
+                    <ul><button><a href="/delete">Delete a Room</a><span></span></button></ul>
+                
+                    <ul><button><a href="/logout">Logout</a><span></span></button></ul>
+               
+            
+    
+            <!-- Display additional options or information as needed -->
+        
+    
+        <footer>
+            <!-- Add any footer content here -->
+        </footer>   
+    </div>
+    
 
     <script>
         // Store the JWT token in local storage for subsequent requests

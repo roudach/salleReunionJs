@@ -14,21 +14,26 @@
 
 </head>
 <body>
-    <div class="form-container">
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+    <section>
+        <div>
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+            <div class="inputbox">
+                
+                    <icon-icon name="mail-outline"></icon-icon>
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email:</label>
+                
             </div>
-            <div class="form-group">
+            <div class="inputbox">
+                <icon-icon name="lock-closed-outline"></icon-icon>
+                <input type="password" name="password" required>
                 <label for="password">Password:</label>
-                <input type="password" name="password" placeholder="password" required>
             </div>
-            <button type="submit" class="submit-btn">Login</button>        
-        </form>
-        <p>Don't have an account? <a href="/register">SignUp</a></p>
-    </div>
-    
+                <button type="submit" class="submit-btn">Login</button>        
+            </form>
+            <p>Don't have an account? <a href="/register">SignUp</a></p>
+        </div>
+    </section>    
 </body>
 </html>

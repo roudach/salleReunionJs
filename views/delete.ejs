@@ -1,20 +1,33 @@
 <!-- deleteRoom.ejs -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Delete Room</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Optional: Link to your CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viwport" content="width=device-width, initial-scale=1.0">
+    <title>Delete a Room</title>
+
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body{
+            background-image: url("img.webp");
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Delete Room</h1>
-        <form method="POST" action="/delete">
-            <div class="form-group">
-                <label for="roomId">Room ID:</label>
-                <input type="text" id="roomId" name="roomId" required>
-            </div>
-            <button type="submit">Delete</button>
-        </form>
-    </div>
+    <section>
+            
+        <div class="container">
+            <h1>Delete Room</h1><br>
+            <form method="POST" action="/delete">
+                <div class="inputbox">
+                    <input type="text" id="roomId" name="roomId" required>
+                    <label for="roomId">Room ID:</label>
+                    
+                </div>
+                <button type="submit"><span></span>Delete</button>
+            </form>
+        </div>
+    </section>
+    
 </body>
 </html>

@@ -1,27 +1,52 @@
 <!-- create_room.ejs -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Create Room</title>
+    <meta charset="UTF-8">
+    <meta name="viwport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/styles.css">
+    <title>Create Room </title>
+    <style>
+        body{
+            background-image: url("img.webp");
+        }
+    </style>
 </head>
 <body>
-    <h1>Create a New Room</h1>
-    <form action="/create-room" method="POST">
+    <section>
         <div>
-            <label for="name">Room Name:</label>
-            <input type="text" name="name" id="name" required>
+            <h2>Create a New Room</h2>
+            <form action="/create-room" method="POST">
+            <div class="inputbox">
+                <input type="text" name="name" id="name" required>
+                <label for="name">Room Name:</label>
+                
+            </div>
+            <div class="inputbox">
+                <input type="text" name="roomId" id="roomId" required>
+                <label for="roomId">Room ID:</label>
+                
+            </div>
+            <div class="inputbox">
+                <input type="number" name="capacity" id="capacity" required>
+                <input type="hidden" id="token" >
+                <label for="capacity">Capacity:</label>
+                
+            </div>
+            <div class="inputbox">
+                <input name="description" id="description">
+                <label for="description">Description:</label>
+                
+            </div>
+            <button type="submit"><span></span>Create Room</button>
+            </form>
         </div>
-        <div>
-            <label for="capacity">Capacity:</label>
-            <input type="number" name="capacity" id="capacity" required>
-            <input type="hidden" id="token" >
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea name="description" id="description"></textarea>
-        </div>
-        <button type="submit">Create Room</button>
-    </form>
+            
+    </section>
+    
     <script>
         const token =localStorage.getItem("jwt")
         console.log(token)

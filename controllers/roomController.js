@@ -62,9 +62,30 @@ const getAllRooms = async (req, res) => {
     }
 };
 
+const getRoomById = async (req, res) => {
+    try {
+        const roomId = req.params.roomId; // Retrieve room ID from the request parameters
+        
+        // Find the room by ID
+        const room = await Room.findById(roomId);
+        
+        // If the room is not found, respond with an error
+        if (!room) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+
+        // Return the room data as JSON
+        res.status(200).json({ room });
+    } catch (error) {
+        console.error('Error finding room:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 module.exports = {
     createRoom,
     getAllRooms,
     reserveRoom,
     deleteRoom,
+    getRoomById,
 };
